@@ -1,22 +1,23 @@
--- Aimbot Scripti yüklendiyse devam eder
+-- Aimbot scripti yüklendiyse devam eder
 repeat task.wait() until getgenv().ExunysDeveloperAimbot
 local Aimbot = getgenv().ExunysDeveloperAimbot
 
--- MaterialLua UI'yi yükle
-local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/raindrop-devs/MaterialLua/main/Source.lua"))()
+-- MaterialLua yükle
+local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/materialuacore/ui/main/library.lua"))()
 
 local UI = Material.Load({
-    Title = "Aimbot Settings",
-    Style = 1,
+    Title = "Exunys Aimbot V3",
+    Style = 2,
     SizeX = 400,
-    SizeY = 350,
-    Theme = "Dark"
+    SizeY = 320,
+    Theme = "Darker"
 })
 
 local AimbotTab = UI.New({
-    Title = "Aimbot"
+    Title = "Aimbot Ayarları"
 })
 
+-- Toggle'lar
 AimbotTab.Toggle({
     Text = "Enabled",
     Callback = function(Value)
@@ -57,6 +58,15 @@ AimbotTab.Toggle({
     Enabled = Aimbot.Settings.OffsetToMoveDirection
 })
 
+AimbotTab.Toggle({
+    Text = "Toggle Mode",
+    Callback = function(Value)
+        Aimbot.Settings.Toggle = Value
+    end,
+    Enabled = Aimbot.Settings.Toggle
+})
+
+-- Sliders
 AimbotTab.Slider({
     Text = "Offset Increment",
     Callback = function(Value)
@@ -68,18 +78,18 @@ AimbotTab.Slider({
 })
 
 AimbotTab.Slider({
-    Text = "Sensitivity",
+    Text = "Sensitivity (CFrame)",
     Callback = function(Value)
         Aimbot.Settings.Sensitivity = Value
     end,
     Min = 0,
     Max = 1,
-    Def = Aimbot.Settings.Sensitivity,
-    Float = 0.01
+    Float = 0.01,
+    Def = Aimbot.Settings.Sensitivity
 })
 
 AimbotTab.Slider({
-    Text = "Sensitivity2",
+    Text = "Sensitivity2 (MouseMoveRel)",
     Callback = function(Value)
         Aimbot.Settings.Sensitivity2 = Value
     end,
@@ -88,6 +98,7 @@ AimbotTab.Slider({
     Def = Aimbot.Settings.Sensitivity2
 })
 
+-- Dropdown: LockPart
 AimbotTab.Dropdown({
     Text = "LockPart",
     Callback = function(Value)
@@ -97,6 +108,7 @@ AimbotTab.Dropdown({
     Def = Aimbot.Settings.LockPart
 })
 
+-- Dropdown: LockMode
 AimbotTab.Dropdown({
     Text = "LockMode",
     Callback = function(Value)
@@ -104,12 +116,4 @@ AimbotTab.Dropdown({
     end,
     Options = {"CFrame", "MouseMoveRel"},
     Def = (Aimbot.Settings.LockMode == 1 and "CFrame" or "MouseMoveRel")
-})
-
-AimbotTab.Toggle({
-    Text = "Toggle Mode",
-    Callback = function(Value)
-        Aimbot.Settings.Toggle = Value
-    end,
-    Enabled = Aimbot.Settings.Toggle
 })
