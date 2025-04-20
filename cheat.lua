@@ -117,3 +117,5 @@ AimbotTab.Dropdown({
     Options = {"CFrame", "MouseMoveRel"},
     Def = (Aimbot.Settings.LockMode == 1 and "CFrame" or "MouseMoveRel")
 })
+
+-- Menü düzenlemesi bitti, script çalıştırılmaya hazır.
